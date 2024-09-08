@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://roan0grmllys"]
+
+[ext_resource type="Script" path="res://Characters/Enemies/enemy.gd" id="1_a5hts"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhr26"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_amwwt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1u0u"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_omnrm"]
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_a5hts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_jhr26")
+
+[node name="Geometry" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_amwwt")
+surface_material_override/0 = SubResource("StandardMaterial3D_x1u0u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(0.803914, 0, 0, 0, -1.94339e-08, 0.496573, 0, -0.444596, -2.17059e-08, 0, 0.46998, -0.194846)
+mesh = SubResource("CylinderMesh_omnrm")
+surface_material_override/0 = SubResource("StandardMaterial3D_x1u0u")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

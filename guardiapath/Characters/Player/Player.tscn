@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://fxailyuhnhuy"]
+
+[ext_resource type="Script" path="res://addons/3d_controls_toolkit/ThirdPersonControler3D.gd" id="1_dnsio"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhr26"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_amwwt"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_omnrm"]
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_jhr26")
+
+[node name="Geometry" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_amwwt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(0.803914, 0, 0, 0, -1.94339e-08, 0.496573, 0, -0.444596, -2.17059e-08, 0, 0.46998, -0.194846)
+mesh = SubResource("CylinderMesh_omnrm")
+
+[node name="ThirdPersonControler3D" type="Node3D" parent="."]
+script = ExtResource("1_dnsio")

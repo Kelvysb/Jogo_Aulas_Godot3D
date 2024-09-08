@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://qfcydwcqvpp4"]
+
+[ext_resource type="PackedScene" uid="uid://yot5ugpirdkl" path="res://Assets/Models/Ruins/Pillar1.fbx" id="1_ak1px"]
+[ext_resource type="Material" uid="uid://3iivoeaejhaj" path="res://Assets/Materials/StonePillarMat.tres" id="2_7kxi4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ukw41"]
+height = 0.0959487
+radius = 0.00996704
+
+[node name="Pillar1" instance=ExtResource("1_ak1px")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Pillar1" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_7kxi4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Pillar1" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar1/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -5.82077e-09, 0.0482651)
+shape = SubResource("CylinderShape3D_ukw41")

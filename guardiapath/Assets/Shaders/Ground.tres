@@ -1,0 +1,66 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://c2og5gam847wa"]
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_88fua"]
+
+[sub_resource type="Gradient" id="Gradient_j0rgp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.537037, 0.666667)
+colors = PackedColorArray(0.0904957, 0.0834637, 0.0766209, 1, 0.147891, 0.154527, 0.13675, 1, 0.192238, 0.215504, 0.203388, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kk7b6"]
+frequency = 0.0069
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6jgku"]
+width = 2048
+height = 2048
+seamless = true
+color_ramp = SubResource("Gradient_j0rgp")
+noise = SubResource("FastNoiseLite_kk7b6")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ngpi0"]
+texture = SubResource("NoiseTexture2D_6jgku")
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_q7qp0"]
+default_input_values = [1, Vector2(50, 50), 2, Vector2(0, 0)]
+function = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_toon, specular_disabled;
+
+uniform sampler2D tex_frg_3;
+
+
+
+void fragment() {
+// UVFunc:4
+	vec2 n_in4p1 = vec2(50.00000, 50.00000);
+	vec2 n_in4p2 = vec2(0.00000, 0.00000);
+	vec2 n_out4p0 = (UV - n_in4p2) * n_in4p1 + n_in4p2;
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, n_out4p0);
+
+
+// FloatConstant:2
+	float n_out2p0 = 0.000000;
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+	METALLIC = n_out2p0;
+	ROUGHNESS = n_out2p0;
+
+
+}
+"
+modes/diffuse = 3
+modes/specular = 2
+nodes/fragment/2/node = SubResource("VisualShaderNodeFloatConstant_88fua")
+nodes/fragment/2/position = Vector2(-40, 380)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_ngpi0")
+nodes/fragment/3/position = Vector2(-420, 140)
+nodes/fragment/4/node = SubResource("VisualShaderNodeUVFunc_q7qp0")
+nodes/fragment/4/position = Vector2(-780, 220)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 3, 2, 0, 0, 2, 3, 0, 0, 0, 4, 0, 3, 0)

@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c0m0svgyqfiy"]
+
+[ext_resource type="Shader" uid="uid://3bbgpxea7xvl" path="res://Assets/Shaders/StoneBlock.tres" id="1_ysflr"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ysflr")
