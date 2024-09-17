@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://roan0grmllys"]
+[gd_scene load_steps=9 format=3 uid="uid://roan0grmllys"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/enemy.gd" id="1_a5hts"]
+[ext_resource type="PackedScene" uid="uid://otj00ewyw6va" path="res://Scenes/Components/FollowTarget.tscn" id="1_leufw"]
+[ext_resource type="PackedScene" uid="uid://do467qvsns4b1" path="res://Scenes/Components/WalkAround.tscn" id="3_rfu83"]
+[ext_resource type="PackedScene" uid="uid://cw8a30c2su0t6" path="res://Scenes/Components/Vision.tscn" id="4_cnkiw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhr26"]
 
@@ -26,6 +29,13 @@ transform = Transform3D(0.803914, 0, 0, 0, -1.94339e-08, 0.496573, 0, -0.444596,
 mesh = SubResource("CylinderMesh_omnrm")
 surface_material_override/0 = SubResource("StandardMaterial3D_x1u0u")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="FollowTarget" parent="." instance=ExtResource("1_leufw")]
+debug_enabled = true
 
-[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+[node name="WalkAround" parent="." instance=ExtResource("3_rfu83")]
+
+[node name="Vision" parent="." instance=ExtResource("4_cnkiw")]
+
+[connection signal="navigation_finished" from="FollowTarget" to="." method="_on_follow_target_navigation_finished"]
+[connection signal="GetSight" from="Vision" to="." method="_on_vision_get_sight"]
+[connection signal="LostSight" from="Vision" to="." method="_on_vision_lost_sight"]
