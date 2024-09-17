@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw8a30c2su0t6"]
+
+[ext_resource type="Script" path="res://Scenes/Components/vision.gd" id="1_fsk60"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4155j"]
+points = PackedVector3Array(0, 0, 0, 5, 0, -1, 15, 0, -50, -5, 0, -1, -15, 0, -50, 5, 5, -1, 15, 5, -50, -5, 5, -1, -15, 5, -50)
+
+[node name="Vision" type="Node3D"]
+script = ExtResource("1_fsk60")
+
+[node name="Vision" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Vision"]
+shape = SubResource("ConvexPolygonShape3D_4155j")
