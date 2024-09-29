@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://u1523st1blof"]
+
+[ext_resource type="PackedScene" uid="uid://dimjc1kio6qf3" path="res://Assets/Models/Weapons/Sword.fbx" id="1_dtjno"]
+[ext_resource type="Shader" uid="uid://coklymbapnvwk" path="res://Assets/Shaders/swordMat.tres" id="2_va07b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_erhlh"]
+render_priority = 0
+shader = ExtResource("2_va07b")
+
+[node name="Sword" instance=ExtResource("1_dtjno")]
+
+[node name="Sword" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_erhlh")

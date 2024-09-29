@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://roan0grmllys"]
+[gd_scene load_steps=12 format=3 uid="uid://roan0grmllys"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/enemy.gd" id="1_a5hts"]
-[ext_resource type="PackedScene" uid="uid://otj00ewyw6va" path="res://Scenes/Components/FollowTarget.tscn" id="1_leufw"]
-[ext_resource type="PackedScene" uid="uid://do467qvsns4b1" path="res://Scenes/Components/WalkAround.tscn" id="3_rfu83"]
-[ext_resource type="PackedScene" uid="uid://cw8a30c2su0t6" path="res://Scenes/Components/Vision.tscn" id="4_cnkiw"]
+[ext_resource type="Script" path="res://addons/3dEnemyToolkit/FollowTarget.gd" id="2_npw1a"]
+[ext_resource type="PackedScene" uid="uid://dx0uh8yclv1ff" path="res://Scenes/Components/WeaponSword.tscn" id="2_qaf2a"]
+[ext_resource type="Script" path="res://addons/3dEnemyToolkit/SimpleVision3D.gd" id="3_s56lj"]
+[ext_resource type="Script" path="res://addons/3dEnemyToolkit/RandomTarget3D.gd" id="4_k4tpw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhr26"]
 
@@ -13,6 +14,11 @@
 albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_omnrm"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6cyif"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5l1ib"]
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_a5hts")
@@ -29,13 +35,61 @@ transform = Transform3D(0.803914, 0, 0, 0, -1.94339e-08, 0.496573, 0, -0.444596,
 mesh = SubResource("CylinderMesh_omnrm")
 surface_material_override/0 = SubResource("StandardMaterial3D_x1u0u")
 
-[node name="FollowTarget" parent="." instance=ExtResource("1_leufw")]
+[node name="WeaponSword" parent="Geometry" instance=ExtResource("2_qaf2a")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+TargetGroups = Array[String](["player"])
+
+[node name="FollowTarget3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
+script = ExtResource("2_npw1a")
 
-[node name="WalkAround" parent="." instance=ExtResource("3_rfu83")]
+[node name="SimpleVision3D" type="Node3D" parent="."]
+script = ExtResource("3_s56lj")
 
-[node name="Vision" parent="." instance=ExtResource("4_cnkiw")]
+[node name="RandomTarget3D" type="Node3D" parent="."]
+script = ExtResource("4_k4tpw")
 
-[connection signal="navigation_finished" from="FollowTarget" to="." method="_on_follow_target_navigation_finished"]
-[connection signal="GetSight" from="Vision" to="." method="_on_vision_get_sight"]
-[connection signal="LostSight" from="Vision" to="." method="_on_vision_lost_sight"]
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(100, 20)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpLabel" type="Label" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
+horizontal_alignment = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.81402, 0, 0, 0, 1.81402, 0, 0, 0, 1.81402, 0, 1.32806, 0)
+billboard = 2
+texture = SubResource("ViewportTexture_6cyif")
+
+[node name="ContactArea" type="Area3D" parent="." groups=["enemy"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ContactArea"]
+shape = SubResource("CapsuleShape3D_5l1ib")
+
+[connection signal="HitTarget" from="Geometry/WeaponSword" to="." method="_on_weapon_sword_hit_target"]
+[connection signal="ReachedTarget" from="FollowTarget3D" to="." method="_on_follow_target_3d_reached_target"]
+[connection signal="navigation_finished" from="FollowTarget3D" to="." method="_on_follow_target_3d_navigation_finished"]
+[connection signal="GetSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_get_sight"]
+[connection signal="LostSight" from="SimpleVision3D" to="." method="_on_simple_vision_3d_lost_sight"]
