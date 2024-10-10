@@ -1,6 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://do467qvsns4b1"]
+[gd_scene load_steps=4 format=3 uid="uid://dg1qfggs0o0ct"]
 
-[ext_resource type="Script" path="res://Scenes/Components/walk_around.gd" id="1_m2tfy"]
+[sub_resource type="GDScript" id="GDScript_eq1tj"]
+script/source = "extends Node3D
+class_name WalkAround
+
+@onready var target_arm: SpringArm3D = $TargetArm
+@onready var target: Marker3D = $TargetArm/Target
+
+func GetNextPoint() -> Vector3:
+	randomize()
+	var angle = deg_to_rad(randi_range(-120, 120))
+	var distance = randf_range(1 , 10)
+	rotation.y = angle
+	target_arm.spring_length = distance
+	return target.global_position
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1iqxv"]
 albedo_color = Color(1, 0, 0, 1)
@@ -9,7 +23,7 @@ albedo_color = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_1iqxv")
 
 [node name="WalkAround" type="Node3D"]
-script = ExtResource("1_m2tfy")
+script = SubResource("GDScript_eq1tj")
 
 [node name="TargetArm" type="SpringArm3D" parent="."]
 

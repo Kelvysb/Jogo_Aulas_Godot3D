@@ -1,8 +1,11 @@
 extends NavigationAgent3D
-class_name FollowTarget
+class_name FollowTarget3D
 
-@export var Speed = 5.0
-@export var TurnSpeed = 0.3
+signal ReachedTarget(target : Node3D)
+
+@export var Speed : float = 5.0
+@export var TurnSpeed : float = 0.3
+@export var ReachTargetMinDistance : float = 1.3
 
 var target : Node3D
 var isTargetSet : bool = false
@@ -12,11 +15,16 @@ var fixedTarget : bool = false
 
 @onready var parent = get_parent() as CharacterBody3D
 
+func _ready() -> void:
+	velocity_computed.connect(_on_velocity_computed)
+
 func _process(delta: float) -> void:
 	if fixedTarget:
 		go_to_location(targetPosition)	
-	else:
-		go_to_location(target.global_position)	
+	elif target:
+		go_to_location(target.global_position)
+		if target and parent.global_position.distance_to(target.global_position) <= ReachTargetMinDistance:
+			emit_signal("ReachedTarget", target)
 	
 	parent.move_and_slide()
 	

@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://fxailyuhnhuy"]
+[gd_scene load_steps=9 format=3 uid="uid://fxailyuhnhuy"]
 
+[ext_resource type="Script" path="res://Characters/Player/player.gd" id="1_1vp3k"]
 [ext_resource type="Script" path="res://addons/3d_controls_toolkit/ThirdPersonControler3D.gd" id="1_dnsio"]
+[ext_resource type="PackedScene" uid="uid://dx0uh8yclv1ff" path="res://Scenes/Components/WeaponSword.tscn" id="2_e576r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhr26"]
 
@@ -8,7 +10,13 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_omnrm"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_6ydg7"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_07uir"]
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_1vp3k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_jhr26")
@@ -20,5 +28,50 @@ mesh = SubResource("CapsuleMesh_amwwt")
 transform = Transform3D(0.803914, 0, 0, 0, -1.94339e-08, 0.496573, 0, -0.444596, -2.17059e-08, 0, 0.46998, -0.194846)
 mesh = SubResource("CylinderMesh_omnrm")
 
+[node name="WeaponSword" parent="Geometry" instance=ExtResource("2_e576r")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+TargetGroups = Array[String](["enemy"])
+
 [node name="ThirdPersonControler3D" type="Node3D" parent="."]
 script = ExtResource("1_dnsio")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(100, 20)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpLabel" type="Label" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100"
+horizontal_alignment = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.81402, 0, 0, 0, 1.81402, 0, 0, 0, 1.81402, 0, 1.32806, 0)
+billboard = 2
+texture = SubResource("ViewportTexture_6ydg7")
+
+[node name="ContactArea" type="Area3D" parent="." groups=["player"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ContactArea"]
+shape = SubResource("CapsuleShape3D_07uir")
+
+[connection signal="HitTarget" from="Geometry/WeaponSword" to="." method="_on_weapon_sword_hit_target"]

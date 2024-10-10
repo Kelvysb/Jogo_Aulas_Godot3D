@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://dx0uh8yclv1ff"]
+
+[ext_resource type="PackedScene" uid="uid://u1523st1blof" path="res://Assets/Models/Weapons/sword.tscn" id="1_l5bsg"]
+[ext_resource type="Script" path="res://Scenes/Components/weapon_sword.gd" id="1_l40pk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6gfn0"]
+size = Vector3(0.362183, 2.37706, 0.125488)
+
+[sub_resource type="Animation" id="Animation_xor50"]
+resource_name = "Atack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.35066, 1.89799e-07, -2.35619), Vector3(-1.5708, 0.880292, 0), Vector3(-1.5708, -2.35619, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8rbor"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, -2.35619, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1nxj3"]
+_data = {
+"Atack": SubResource("Animation_xor50"),
+"RESET": SubResource("Animation_8rbor")
+}
+
+[node name="WeaponSword" type="Node3D"]
+script = ExtResource("1_l40pk")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(-0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.707107, 0.707107, 3.09086e-08, 0, 0, 0)
+
+[node name="Sword" parent="Pivot" instance=ExtResource("1_l5bsg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06392, 0)
+
+[node name="ContactArea" type="Area3D" parent="Pivot/Sword"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Sword/ContactArea"]
+transform = Transform3D(1, 1.78814e-07, -8.64267e-07, 2.98023e-08, 1, -8.04663e-07, 0, -9.53674e-07, 1.00001, -0.0298468, 1.82547, 0.0183095)
+shape = SubResource("BoxShape3D_6gfn0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Pivot")
+libraries = {
+"": SubResource("AnimationLibrary_1nxj3")
+}
+
+[connection signal="area_shape_entered" from="Pivot/Sword/ContactArea" to="." method="_on_contact_area_area_shape_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
