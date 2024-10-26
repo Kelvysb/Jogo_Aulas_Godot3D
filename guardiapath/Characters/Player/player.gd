@@ -1,9 +1,12 @@
 extends CharacterBody3D
 class_name Player
 
-@export var Hp : int = 100
+@export var Hp : int = 1000
 @onready var weapon_sword: WeaponSword = $Geometry/WeaponSword
 @onready var hp_label: Label = $SubViewport/Control/HpLabel
+
+func _ready() -> void:
+	hp_label.text = str(Hp)
 
 func DamageTake(value : int):
 	Hp -= value
