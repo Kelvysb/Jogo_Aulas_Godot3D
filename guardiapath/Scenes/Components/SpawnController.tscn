@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ourmqlhdbk0p"]
+
+[ext_resource type="Script" path="res://Scenes/Components/spawn_controller.gd" id="1_bgmkn"]
+[ext_resource type="Script" path="res://addons/3dEnemyToolkit/RandomTarget3D.gd" id="2_56fr6"]
+
+[node name="SpawnController" type="Node3D"]
+script = ExtResource("1_bgmkn")
+
+[node name="RandomTarget3D" type="Node3D" parent="."]
+script = ExtResource("2_56fr6")
+MaxRadius = 50.0
+MaxAngleRange = -360
+MinAngleRange = 360

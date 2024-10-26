@@ -20,7 +20,7 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5l1ib"]
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_a5hts")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

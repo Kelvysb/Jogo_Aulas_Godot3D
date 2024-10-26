@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dtoinm4yqeep6" path="res://Assets/Models/Ruins/cube_2.tscn" id="3_ex7lq"]
 [ext_resource type="PackedScene" uid="uid://bdjke76f0nvm5" path="res://Assets/Models/Ruins/pillar_2.tscn" id="6_bb4tj"]
 [ext_resource type="PackedScene" uid="uid://dvdbga2ch5lnc" path="res://Assets/Models/Ruins/pillar_3.tscn" id="7_w4opm"]
-[ext_resource type="PackedScene" uid="uid://roan0grmllys" path="res://Characters/Enemies/Enemy.tscn" id="8_pbl7h"]
+[ext_resource type="PackedScene" uid="uid://ourmqlhdbk0p" path="res://Scenes/Components/SpawnController.tscn" id="8_d4gx6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_avpiw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -283,5 +283,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.26606, 0.015873, -0.777371)
 [node name="Pillar17" parent="NavigationRegion3D/Map/Ruins" instance=ExtResource("7_w4opm")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.50413, 0.015873, 22.1208)
 
-[node name="Enemy" parent="." instance=ExtResource("8_pbl7h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3258, 2.13704, -22.9061)
+[node name="SpawnController" parent="." instance=ExtResource("8_d4gx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42929, -11.6971)
+Enemy = "res://Characters/Enemies/Enemy.tscn"
+EnemyGroup = "enemy"
