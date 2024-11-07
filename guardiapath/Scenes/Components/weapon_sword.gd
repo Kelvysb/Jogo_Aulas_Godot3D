@@ -26,5 +26,8 @@ func _on_contact_area_area_shape_entered(area_rid: RID, area: Area3D, area_shape
 		var query: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
 		query.set_shape(area.shape_owner_get_owner(area_shape_index).shape)
 		var collision_points: Array = space_state.collide_shape(query)
-		emit_signal("HitTarget", area.get_parent_node_3d(), collision_points[0])
+		if len(collision_points) > 0:
+			emit_signal("HitTarget", area.get_parent_node_3d(), collision_points[0])
+		else:
+			emit_signal("HitTarget", area.get_parent_node_3d(), area.get_parent_node_3d().global_position)
 		
