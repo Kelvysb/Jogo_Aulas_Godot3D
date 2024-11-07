@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cd863tnwvtd5g"]
+
+[ext_resource type="Texture2D" uid="uid://c3onimw8en50v" path="res://Assets/Textures/Dungeon_BaseColor.png" id="1_moqc7"]
+[ext_resource type="Texture2D" uid="uid://7ingd5fqafh3" path="res://Assets/Textures/Dungeon_Normal.png" id="2_1mh0m"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_moqc7")
+normal_enabled = true
+normal_texture = ExtResource("2_1mh0m")
