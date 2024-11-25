@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgu2rht2jfxhl"]
+
+[ext_resource type="Script" path="res://Scripts/ItemBase.gd" id="1_dwqsg"]
+[ext_resource type="PackedScene" uid="uid://bd8027ym4vvoy" path="res://Assets/Models/Itens/speed_item.tscn" id="2_yjsmj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_elp6u"]
+
+[node name="SpeedBoost" type="StaticBody3D" groups=["itens"]]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
+script = ExtResource("1_dwqsg")
+Id = "2"
+Name = "Speed Boost"
+Description = "Speed Boost 30 secs"
+Commands = Array[String](["{\"Property\":1, \"Value\": 10,  \"Duration\" :15}"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_elp6u")
+
+[node name="SpeedItem" parent="." instance=ExtResource("2_yjsmj")]
+transform = Transform3D(0.34641, 0, -0.2, 0, 0.4, 0, 0.2, 0, 0.34641, 0, 0, 0)

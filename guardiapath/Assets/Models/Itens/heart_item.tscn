@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://clpsj02wstn4t"]
+
+[ext_resource type="PackedScene" uid="uid://dyx2ucdfbuxcu" path="res://Assets/Models/Itens/HeartItem.fbx" id="1_5cdid"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Highlight.gdshader" id="2_s1kfv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_avgic"]
+render_priority = 0
+shader = ExtResource("2_s1kfv")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnwyf"]
+next_pass = SubResource("ShaderMaterial_avgic")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0, 0, 1)
+roughness = 0.0
+
+[node name="HeartItem" instance=ExtResource("1_5cdid")]
+
+[node name="BézierCurve" parent="." index="0"]
+transform = Transform3D(72.7928, 0, 68.5653, 0, 100, 0, -68.5653, 0, 72.7928, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_dnwyf")

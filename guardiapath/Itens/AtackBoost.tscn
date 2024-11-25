@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://djg5onuf5vo16"]
+
+[ext_resource type="Script" path="res://Scripts/ItemBase.gd" id="1_u7ok6"]
+[ext_resource type="PackedScene" uid="uid://6hgvd6vqujoq" path="res://Assets/Models/Itens/sword_item.tscn" id="2_y8dhl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_r2ybs"]
+radius = 0.355208
+
+[node name="AtackBoost" type="StaticBody3D" groups=["itens"]]
+script = ExtResource("1_u7ok6")
+Id = "3"
+Name = "Atack Boost"
+Description = "Atack Boost for 30 secs"
+Commands = Array[String](["{\"Property\":2, \"Value\": 25,  \"Duration\" :15}"])
+
+[node name="SwordItem" parent="." instance=ExtResource("2_y8dhl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_r2ybs")

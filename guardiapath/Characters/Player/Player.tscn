@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://fxailyuhnhuy"]
+[gd_scene load_steps=10 format=3 uid="uid://fxailyuhnhuy"]
 
 [ext_resource type="Script" path="res://Characters/Player/player.gd" id="1_1vp3k"]
-[ext_resource type="Script" path="res://addons/3d_controls_toolkit/ThirdPersonControler3D.gd" id="1_dnsio"]
 [ext_resource type="PackedScene" uid="uid://dx0uh8yclv1ff" path="res://Scenes/Components/WeaponSword.tscn" id="2_e576r"]
+[ext_resource type="Script" path="res://addons/3d_controls_toolkit/FirstPersonControler3D.gd" id="3_ejona"]
+[ext_resource type="Texture2D" uid="uid://dr16kekcmgrqt" path="res://Assets/Textures/Hand.png" id="4_qa21r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhr26"]
 
@@ -10,8 +11,8 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_omnrm"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_6ydg7"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="SphereShape3D" id="SphereShape3D_tyhyb"]
+radius = 0.0819079
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_07uir"]
 
@@ -32,14 +33,37 @@ mesh = SubResource("CylinderMesh_omnrm")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 TargetGroups = Array[String](["enemy"])
 
-[node name="ThirdPersonControler3D" type="Node3D" parent="."]
-script = ExtResource("1_dnsio")
+[node name="InteractionArmPivot" type="Node3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50202, 0)
 
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(100, 20)
+[node name="InteractionArm" type="SpringArm3D" parent="Geometry/InteractionArmPivot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -0.216782)
+spring_length = 2.0
 
-[node name="Control" type="Control" parent="SubViewport"]
+[node name="InteractionGroup" type="Node3D" parent="Geometry/InteractionArmPivot/InteractionArm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73652e-07, 0, 1.98635)
+
+[node name="InteractionArea" type="Area3D" parent="Geometry/InteractionArmPivot/InteractionArm/InteractionGroup"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/InteractionArmPivot/InteractionArm/InteractionGroup/InteractionArea"]
+shape = SubResource("SphereShape3D_tyhyb")
+
+[node name="InteractionSprite" type="Sprite3D" parent="Geometry/InteractionArmPivot/InteractionArm/InteractionGroup"]
+transform = Transform3D(0.0860657, 0, 0, 0, 0.0860657, 0, 0, 0, 0.0860657, -1.23163e-08, 0, -0.140882)
+visible = false
+billboard = 1
+texture = ExtResource("4_qa21r")
+
+[node name="ContactArea" type="Area3D" parent="." groups=["player"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ContactArea"]
+shape = SubResource("CapsuleShape3D_07uir")
+
+[node name="FirstPersonControler3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.495591, 0)
+script = ExtResource("3_ejona")
+
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,31 +71,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HpLabel" type="Label" parent="SubViewport/Control"]
+[node name="HpLabel" type="Label" parent="Control"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = 7.0
+offset_right = 92.0
+offset_bottom = 32.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "100"
 horizontal_alignment = 1
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1.81402, 0, 0, 0, 1.81402, 0, 0, 0, 1.81402, 0, 1.32806, 0)
-billboard = 2
-texture = SubResource("ViewportTexture_6ydg7")
-
-[node name="ContactArea" type="Area3D" parent="." groups=["player"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ContactArea"]
-shape = SubResource("CapsuleShape3D_07uir")
-
 [connection signal="HitTarget" from="Geometry/WeaponSword" to="." method="_on_weapon_sword_hit_target"]
+[connection signal="body_entered" from="Geometry/InteractionArmPivot/InteractionArm/InteractionGroup/InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="Geometry/InteractionArmPivot/InteractionArm/InteractionGroup/InteractionArea" to="." method="_on_interaction_area_body_exited"]

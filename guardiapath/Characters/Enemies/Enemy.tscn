@@ -40,7 +40,6 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 TargetGroups = Array[String](["player"])
 
 [node name="FollowTarget3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
 script = ExtResource("2_npw1a")
 
 [node name="SimpleVision3D" type="Node3D" parent="."]

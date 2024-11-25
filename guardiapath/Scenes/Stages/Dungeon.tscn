@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu7e3tdllvld5"]
+[gd_scene load_steps=11 format=3 uid="uid://cu7e3tdllvld5"]
 
 [ext_resource type="MeshLibrary" uid="uid://c3wfrrtnrv3h5" path="res://Assets/Models/Dungeon/DungeonLib.tres" id="1_8dwah"]
 [ext_resource type="PackedScene" uid="uid://fxailyuhnhuy" path="res://Characters/Player/Player.tscn" id="2_xchmi"]
 [ext_resource type="PackedScene" uid="uid://roan0grmllys" path="res://Characters/Enemies/Enemy.tscn" id="3_n5p46"]
+[ext_resource type="PackedScene" uid="uid://bgu2rht2jfxhl" path="res://Itens/SpeedBoost.tscn" id="4_cytve"]
+[ext_resource type="PackedScene" uid="uid://djg5onuf5vo16" path="res://Itens/AtackBoost.tscn" id="5_hkb5d"]
+[ext_resource type="PackedScene" uid="uid://bwmw0mgenb5pm" path="res://Itens/HpUp.tscn" id="6_cb775"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lkbkh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -52,3 +55,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.6527, 5.77985, 21.4873)
 
 [node name="Enemy3" parent="." instance=ExtResource("3_n5p46")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.768, 6.38887, -51.7239)
+
+[node name="SpeedBoost" parent="." instance=ExtResource("4_cytve")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.74171, 6.28031, 12.0601)
+
+[node name="AtackBoost" parent="." instance=ExtResource("5_hkb5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.478, 6.32939, -4.07723)
+
+[node name="HpUp" parent="." instance=ExtResource("6_cb775")]
+transform = Transform3D(0.778747, 0, 0.627338, 0, 1, 0, -0.627338, 0, 0.778747, -34.3352, 6.39364, 3.58023)
