@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256"
+   height="256"
+   viewBox="0 0 67.733332 67.733333"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="Action.png"
+   inkscape:export-xdpi="93.49"
+   inkscape:export-ydpi="93.49"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="Action.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.53858859"
+     inkscape:cx="-12.068581"
+     inkscape:cy="233.9448"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1063" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1063">
+      <g
+         aria-label="!"
+         id="text186"
+         style="font-size:64.735px;line-height:1.25;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:1.51722;fill:#008000">
+        <path
+           d="M 37.406861,10.33385 36.58503,44.439839 H 31.211519 L 30.326471,10.33385 Z m -0.316089,47.065633 h -6.448213 v -6.669475 h 6.448213 z"
+           id="path1057"
+           style="fill:#008000" />
+      </g>
+      <ellipse
+         style="fill:none;stroke:#008000;stroke-width:3.82198;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:fill markers stroke"
+         id="path448"
+         cx="33.866665"
+         cy="33.866665"
+         rx="30.801134"
+         ry="30.248734" />
+    </g>
+  </g>
+</svg>
