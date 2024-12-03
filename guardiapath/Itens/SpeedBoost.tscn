@@ -9,9 +9,12 @@
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
 script = ExtResource("1_dwqsg")
 Id = "2"
+TypeId = "2"
 Name = "Speed Boost"
 Description = "Speed Boost 30 secs"
+ImageRef = "res://Assets/Textures/SpeedIcon.svg"
 Commands = Array[String](["{\"Property\":1, \"Value\": 10,  \"Duration\" :15}"])
+MaxStack = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_elp6u")

@@ -59,8 +59,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.768, 6.38887, -51.7239)
 [node name="SpeedBoost" parent="." instance=ExtResource("4_cytve")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.74171, 6.28031, 12.0601)
 
+[node name="SpeedBoost2" parent="." instance=ExtResource("4_cytve")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.74171, 6.28031, 8.00609)
+
+[node name="SpeedBoost3" parent="." instance=ExtResource("4_cytve")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.74171, 6.28031, 3.66081)
+
 [node name="AtackBoost" parent="." instance=ExtResource("5_hkb5d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.478, 6.32939, -4.07723)
 
+[node name="AtackBoost2" parent="." instance=ExtResource("5_hkb5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.49099, 6.32939, -4.07723)
+
+[node name="AtackBoost3" parent="." instance=ExtResource("5_hkb5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7027, 6.32939, -4.07723)
+
 [node name="HpUp" parent="." instance=ExtResource("6_cb775")]
 transform = Transform3D(0.778747, 0, 0.627338, 0, 1, 0, -0.627338, 0, 0.778747, -34.3352, 6.39364, 3.58023)
+
+[node name="HpUp2" parent="." instance=ExtResource("6_cb775")]
+transform = Transform3D(0.778747, 0, 0.627338, 0, 1, 0, -0.627338, 0, 0.778747, -34.3352, 6.39364, 23.5993)
+
+[node name="HpUp3" parent="." instance=ExtResource("6_cb775")]
+transform = Transform3D(0.778747, 0, 0.627338, 0, 1, 0, -0.627338, 0, 0.778747, -59.814, 6.39364, 23.5993)
