@@ -9,9 +9,12 @@ radius = 0.355208
 [node name="AtackBoost" type="StaticBody3D" groups=["itens"]]
 script = ExtResource("1_u7ok6")
 Id = "3"
+TypeId = "3"
 Name = "Atack Boost"
 Description = "Atack Boost for 30 secs"
+ImageRef = "res://Assets/Textures/AtackIcon.svg"
 Commands = Array[String](["{\"Property\":2, \"Value\": 25,  \"Duration\" :15}"])
+MaxStack = 16
 
 [node name="SwordItem" parent="." instance=ExtResource("2_y8dhl")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
